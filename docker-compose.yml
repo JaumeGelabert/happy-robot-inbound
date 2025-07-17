@@ -1,0 +1,31 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - API_KEY=${API_KEY:-production-api-key-12345}
+    restart: unless-stopped
+    volumes:
+      # Mount your local db.json if you need persistence
+      - ./db.json:/app/db.json:ro
+
+  # Development service (optional)
+  app-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=development
+      - API_KEY=${API_KEY:-dev-api-key-12345}
+    volumes:
+      - .:/app
+      - /app/node_modules
+    profiles:
+      - dev
+    restart: unless-stopped

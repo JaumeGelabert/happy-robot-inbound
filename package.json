@@ -6,7 +6,13 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "docker:build": "docker build -t happy-robot-inbound .",
+    "docker:run": "docker run -p 3000:3000 -e API_KEY=production-api-key-12345 happy-robot-inbound",
+    "docker:dev": "docker compose --profile dev up app-dev",
+    "docker:prod": "docker compose up app",
+    "docker:prod-with-env": "API_KEY=production-api-key-12345 docker compose up app",
+    "docker:stop": "docker compose down"
   },
   "dependencies": {
     "react": "19.1.0",
