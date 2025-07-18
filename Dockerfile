@@ -39,6 +39,9 @@ RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
 
+# Copy the db.json file for the API routes
+COPY --from=builder /app/db.json ./db.json
+
 RUN mkdir .next
 RUN chown nextjs:nodejs .next
 
