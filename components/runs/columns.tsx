@@ -3,12 +3,8 @@
 import { Run } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
-import Link from "next/link";
 import { ArrowUpDown } from "lucide-react";
-import { Button } from "../ui/button";
-
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
+import Link from "next/link";
 
 export const columns: ColumnDef<Run>[] = [
   {
@@ -18,8 +14,10 @@ export const columns: ColumnDef<Run>[] = [
       const firstFive = row.original.id.slice(0, 5);
       const lastFive = row.original.id.slice(-5);
       return (
-        <Link href={`/runs/${row.original.id}`}>
-          <div className="text-left font-mono text-sm text-zinc-600 bg-zinc-100 px-2 py-1 rounded-md hover:bg-zinc-200 hover:text-black transition-colors">
+        <Link
+          href={`/use-case/${row.original.use_case_id}?run_id=${row.original.id}`}
+        >
+          <div className="text-left font-mono text-sm text-zinc-600 bg-zinc-100 px-2 py-1 rounded-md hover:bg-zinc-200 hover:text-black transition-colors w-fit">
             {firstFive}...{lastFive}
           </div>
         </Link>
