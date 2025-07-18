@@ -19,6 +19,10 @@ interface RunEventsProps {
 }
 
 export function RunEvents({ run }: RunEventsProps) {
+  /**
+   * The session events could be improved in the future. The amount of time needed to make it
+   * look good, in this case, doesnt make sense for the small output.
+   */
   const renderSessionEvent = (event: SessionEvent) => {
     return (
       <div>
@@ -48,21 +52,34 @@ export function RunEvents({ run }: RunEventsProps) {
                 This ternary should be replaced with a proper implementation.
                 For this demo, I only use these two values.
             */}
+          <p className="mt-4">Details:</p>
           {event.integration_name === "AI" ? (
-            <p>AI</p>
+            <ul>
+              <li>
+                <p>Input: {event.output.input as string}</p>
+              </li>
+              <li>
+                <p>Prompt: {event.output.prompt as string}</p>
+              </li>
+              <li>
+                <p>Response: {JSON.stringify(event.output.response)}</p>
+              </li>
+            </ul>
           ) : (
-            <ul className="text-zinc-500 mt-4">
+            <ul className=" mt-1">
               <li>
                 Room name:{" "}
                 <Tooltip>
                   <TooltipTrigger>
-                    {event.output.room_name.slice(0, 5) as string}...
+                    {(event.output.room_name as string)?.slice(0, 5)}...
                   </TooltipTrigger>
-                  <TooltipContent>{event.output.room_name}</TooltipContent>
+                  <TooltipContent>
+                    {event.output.room_name as string}
+                  </TooltipContent>
                 </Tooltip>
               </li>
-              <li>From number: {event.output.from_number}</li>
-              <li>To number: {event.output.to_number}</li>
+              <li>From number: {event.output.from_number as string}</li>
+              <li>To number: {event.output.to_number as string}</li>
             </ul>
           )}
         </span>
