@@ -37,7 +37,9 @@ ENV NODE_ENV=production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/public ./public
+# Create public directory and copy if it exists, otherwise create empty directory
+RUN mkdir -p ./public
+COPY --from=builder /app/public/* ./public/ 2>/dev/null || true
 
 RUN mkdir .next
 RUN chown nextjs:nodejs .next
