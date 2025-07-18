@@ -2,13 +2,14 @@
 
 import { getRunByRunIdAction } from "@/app/actions/getRunByRunIdAction";
 import ContentWrapper from "@/components/ContentWrapper";
-import { Run } from "@/lib/types";
+import { RunEvents } from "@/components/runs/RunEvents";
+import { DetailedRun } from "@/lib/types";
 import { useQueryState } from "nuqs";
 import { useEffect, useState } from "react";
 
 export default function UseCasePage() {
   const [runId] = useQueryState("run_id");
-  const [run, setRun] = useState<Run | null>(null);
+  const [run, setRun] = useState<DetailedRun | null>(null);
   /**
    * Again, we should check if the useCaseId and runId are valid and belongs to the authenticated user...
    */
@@ -37,6 +38,12 @@ export default function UseCasePage() {
             <p className="text-sm text-zinc-700 font-medium">{run?.id}</p>
           </div>
           <div className="flex flex-row justify-start items-center gap-2">
+            <p className="text-sm text-zinc-500">Version:</p>
+            <p className="text-sm text-zinc-700 font-medium">
+              {run?.version.version_number}
+            </p>
+          </div>
+          <div className="flex flex-row justify-start items-center gap-2">
             <p className="text-sm text-zinc-500">Status:</p>
             <p className="text-sm text-zinc-700 font-medium">{run?.status}</p>
           </div>
@@ -49,6 +56,7 @@ export default function UseCasePage() {
             </p>
           </div>
         </div>
+        {run && <RunEvents run={run} />}
       </div>
     </ContentWrapper>
   );
