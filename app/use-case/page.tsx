@@ -6,9 +6,10 @@ import { DataTable } from "@/components/runs/data-table";
 import ContentWrapper from "@/components/ContentWrapper";
 import { Run } from "@/lib/types";
 import { useQueryState } from "nuqs";
-import { useTransition, useState, useEffect } from "react";
+import { useTransition, useState, useEffect, Suspense } from "react";
+import { Loader2Icon } from "lucide-react";
 
-export default function UseCasePage() {
+function UseCasePageContent() {
   const [useCaseId] = useQueryState("use_case_id");
   const [runs, setRuns] = useState<Run[]>([]);
   const [isLoading, startTransition] = useTransition();
@@ -36,7 +37,29 @@ export default function UseCasePage() {
   return (
     <ContentWrapper>
       <p className="text-sm text-gray-700 font-medium">Runs</p>
-      <DataTable columns={columns} data={runs} />
+      {isLoading ? (
+        <div className="flex justify-center items-center h-full">
+          <Loader2Icon className="w-4 h-4 animate-spin text-zinc-500" />
+        </div>
+      ) : (
+        <DataTable columns={columns} data={runs} />
+      )}
     </ContentWrapper>
+  );
+}
+
+export default function UseCasePage() {
+  return (
+    <Suspense
+      fallback={
+        <ContentWrapper>
+          <div className="flex justify-center items-center h-full">
+            <Loader2Icon className="w-4 h-4 animate-spin text-zinc-500" />
+          </div>
+        </ContentWrapper>
+      }
+    >
+      <UseCasePageContent />
+    </Suspense>
   );
 }

@@ -4,8 +4,6 @@ node_modules
 npm-debug.log
 README.md
 .env
-.env.local
-.env.production.local
 .git
 .gitignore
 .eslintrc.json

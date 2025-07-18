@@ -80,7 +80,7 @@ export default function EventActionsTable({
           <TableRow key={`${action.timestamp}-${arrayIndex}`}>
             <TableCell className="font-medium">{action.index}</TableCell>
             <TableCell className="text-sm text-muted-foreground">
-              {action.integration_name}
+              {action.integration_name ?? "-"}
             </TableCell>
             <TableCell className="text-sm text-muted-foreground">
               {getIntegration(action)}

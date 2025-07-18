@@ -3,11 +3,21 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - FMCSA_WEB_KEY=${FMCSA_WEB_KEY:-default-fmcsa-key}
+        - API_KEY=${API_KEY:-production-api-key-12345}
+        - NEXT_PUBLIC_HAPPYROBOT_BASE=${NEXT_PUBLIC_HAPPYROBOT_BASE:-http://localhost:8080}
+        - HAPPYROBOT_API_KEY=${HAPPYROBOT_API_KEY:-default-api-key}
+        - HAPPYROBOT_ORG_ID=${HAPPYROBOT_ORG_ID:-default-org-id}
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
       - API_KEY=${API_KEY:-production-api-key-12345}
+      - FMCSA_WEB_KEY=${FMCSA_WEB_KEY:-default-fmcsa-key}
+      - NEXT_PUBLIC_HAPPYROBOT_BASE=${NEXT_PUBLIC_HAPPYROBOT_BASE:-http://localhost:8080}
+      - HAPPYROBOT_API_KEY=${HAPPYROBOT_API_KEY:-default-api-key}
+      - HAPPYROBOT_ORG_ID=${HAPPYROBOT_ORG_ID:-default-org-id}
     restart: unless-stopped
     volumes:
       # Mount your local db.json if you need persistence
@@ -23,6 +33,10 @@ services:
     environment:
       - NODE_ENV=development
       - API_KEY=${API_KEY:-dev-api-key-12345}
+      - FMCSA_WEB_KEY=${FMCSA_WEB_KEY:-default-fmcsa-key}
+      - NEXT_PUBLIC_HAPPYROBOT_BASE=${NEXT_PUBLIC_HAPPYROBOT_BASE:-http://localhost:8080}
+      - HAPPYROBOT_API_KEY=${HAPPYROBOT_API_KEY:-default-api-key}
+      - HAPPYROBOT_ORG_ID=${HAPPYROBOT_ORG_ID:-default-org-id}
     volumes:
       - .:/app
       - /app/node_modules

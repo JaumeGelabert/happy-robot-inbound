@@ -5,9 +5,10 @@ import ContentWrapper from "@/components/ContentWrapper";
 import { RunEvents } from "@/components/runs/RunEvents";
 import { DetailedRun } from "@/lib/types";
 import { useQueryState } from "nuqs";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
+import { Loader2Icon } from "lucide-react";
 
-export default function UseCasePage() {
+function UseCasePageContent() {
   const [runId] = useQueryState("run_id");
   const [run, setRun] = useState<DetailedRun | null>(null);
   /**
@@ -59,5 +60,21 @@ export default function UseCasePage() {
         {run && <RunEvents run={run} />}
       </div>
     </ContentWrapper>
+  );
+}
+
+export default function UseCasePage() {
+  return (
+    <Suspense
+      fallback={
+        <ContentWrapper>
+          <div className="flex justify-center items-center h-full">
+            <Loader2Icon className="w-4 h-4 animate-spin text-zinc-500" />
+          </div>
+        </ContentWrapper>
+      }
+    >
+      <UseCasePageContent />
+    </Suspense>
   );
 }

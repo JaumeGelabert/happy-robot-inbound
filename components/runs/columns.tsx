@@ -42,6 +42,8 @@ export const columns: ColumnDef<Run>[] = [
             "text-left text-xs text-zinc-600 bg-zinc-100 px-2 py-1 rounded-md w-fit font-medium",
             row.original.status === "completed"
               ? "bg-emerald-50 text-emerald-600"
+              : row.original.status === "running"
+              ? "bg-blue-50 text-blue-600"
               : "bg-red-50 text-red-600"
           )}
         >

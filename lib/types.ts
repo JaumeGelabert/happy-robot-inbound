@@ -33,7 +33,7 @@ export interface UseCase {
 
 export interface Run {
   id: string;
-  status: "completed" | "failed";
+  status: "completed" | "failed" | "running";
   org_id: string;
   timestamp: string;
   use_case_id: string;
@@ -112,6 +112,7 @@ export interface LoadDetails {
 export interface SessionAction {
   timestamp: string;
   index: number;
+  integration_name?: string;
   status?: "completed";
   duration?: number;
   transcript?: string;
