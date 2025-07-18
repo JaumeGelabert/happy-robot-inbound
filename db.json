@@ -1,13 +1,13 @@
 [
   {
     "load_id": "21",
-    "origin": "Chicago, IL",
-    "destination": "Dallas, TX",
+    "origin": "Chicago",
+    "destination": "Dallas",
     "pickup_datetime": "2025-07-22T08:00:00Z",
     "delivery_datetime": "2025-07-23T18:00:00Z",
     "equipment_type": "Dry Van",
     "loadboard_rate": 2500,
-    "notes": "No hazmat · driver-assist unload",
+    "notes": "Driver-assist unload",
     "weight": 42000,
     "commodity_type": "Consumer Electronics",
     "num_of_pieces": 1200,

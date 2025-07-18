@@ -1,21 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs/promises";
-
-type Load = {
-  load_id: string;
-  origin: string;
-  destination: string;
-  pickup_datetime: string;
-  delivery_datetime: string;
-  equipment_type: string;
-  loadboard_rate: number;
-  notes: string;
-  weight: number;
-  commodity_type: string;
-  num_of_pieces: number;
-  miles: number;
-  dimensions: string;
-};
+import { Load } from "@/lib/types";
 
 export async function POST(req: NextRequest) {
   try {
